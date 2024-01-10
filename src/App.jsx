@@ -47,6 +47,7 @@ export default class App extends Component {
               <div>
                 <button onClick={()=>DeleteTodo(e.id)}>Delete</button>
                 <button onClick={()=>CheckTodo(e.id)}>Done</button>
+                <button>Update todo</button>
               </div>
               </div>
             ))
