@@ -5,12 +5,18 @@ import {Products} from "./assets/Data"
 export default function App() {
     const [productList, setProductList] = useState(Products);
     const [searchWord, setSearchWord] = useState("");
-    const [category, setCategory] = useState("") ; 
-    const [cartItems , setCartItems]=useState([])
+    const [category, setCategory] = useState("");
+    const [cartItems, setCartItems] = useState([])
+    const [PriceFilter, setPriceFilter] = useState(0);
     return (
         <div>
 
-            <NavigationBar cartItems={cartItems} setCategory={setCategory} setSearchWord={setSearchWord}/>
+            <NavigationBar
+            setCartItems={setCartItems}
+                setPriceFilter={setPriceFilter}
+                cartItems={cartItems}
+                setCategory={setCategory}
+                setSearchWord={setSearchWord}/>
 
             <ProductList
                 data={searchWord != ""
@@ -19,9 +25,11 @@ export default function App() {
                     )
                     : category != ""
                         ? productList.filter(e => e.category.name == category)
-                        : productList}
-                        
-                        setCartItems={setCartItems}/>
+                        : PriceFilter != 0
+                            ? productList.filter(e => e.price <= PriceFilter)
+                            : productList}
+                setCartItems={setCartItems}
+                cartItems={cartItems}/>
         </div>
     )
 }
